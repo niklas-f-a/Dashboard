@@ -11,20 +11,20 @@ export default function Traffic() {
 
   const { data, loading, error } = useFetchWithInterval('/departures', intervalTime)
 
-  console.log(data);
   return (
     <section className={style.traffic}>
-      {error && <h1>{error.message}</h1>}
       <div className={style.left}>
         <article className={style.upperLeft}>
+        {error && <h1>{error.message}</h1>}
           <h2>Bussar</h2>
           <div className={style.departures}>
             {loading && <p>Loading...</p>}
-            {data?.Buses && data.Buses.splice(0, 3).map(bus => <Sign vehicle={bus} key={uuidv4()} />)}
+            {data?.Buses && !loading && data.Buses.splice(0, 3).map(bus => <Sign vehicle={bus} key={uuidv4()} />)}
           </div>
         </article>
         <article className={style.bottomLeft}>
           <h2>Tunnelbana</h2>
+          {error && <h1>{error.message}</h1>}
           <div className={style.departures}>
             {loading && <p>Loading...</p>}
             {data?.Metros && data.Metros.splice(0, 3).map(metro => <Sign vehicle={metro} key={uuidv4()} />)}
@@ -33,6 +33,7 @@ export default function Traffic() {
       </div>
       <div className={style.right}>
         <h2>Tvärbana</h2>
+        {error && <h1>{error.message}</h1>}
         <article>
           {loading && <p>Loading...</p>}
           {data?.Trams && data.Trams.splice(0, 2).map(tram => <Sign vehicle={tram} key={uuidv4()} />)}
