@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Average+Sans&display=swap');
+
+$primary: #5D2C46;
+$secondary: #485B61;
+
+$headers: 'Archivo Black', sans-serif;
+$para: 'Average Sans', sans-serif;
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+ul, li{
+  list-style: none;
+}
+
+.App{
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+
+h1, h2, h3, h4, h5, h6{
+  font-family: $headers;
+}
+
+p, li{
+  font-family: $para;
+}
+

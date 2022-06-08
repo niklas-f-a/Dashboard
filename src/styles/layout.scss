@@ -1,0 +1,29 @@
+main{
+  background-color: #FFF;
+  display: grid;
+  height: 90%;
+  width: 90%;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas: "traffic traffic traffic traffic clock clock"
+                        "news news news weather weather weather"
+                        "news news news currency currency currency";
+  gap: 1rem;
+  .traffic{
+    background-color: red;
+    grid-area: traffic;
+  }
+  .weather{
+    background-color: pink;
+    grid-area: weather;
+  }
+  .newsFeed{
+    background-color: beige;
+    grid-area: news;
+  }
+  .currency{
+    background-color: gold;
+    grid-area: currency;
+  }
+}
