@@ -12,13 +12,15 @@ export default function Clock() {
 
   useEffect(() => {
 
-    setInterval(() => {
-
+    const tick = () => {
       setToday(new Date())
+    }
 
-    }, 1000)
+    setInterval(tick, 1000)
 
-  }, [today])
+    return () => clearInterval(tick)
+
+  }, [])
 
 
   const secondDegree = () => ((today.getSeconds() / 60) * 360) + 360
