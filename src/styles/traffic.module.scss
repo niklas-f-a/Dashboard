@@ -1,0 +1,63 @@
+@import './App.scss';
+
+$sl-colour: #A80B26;
+
+.traffic{
+  grid-area: traffic;
+  border: 1px solid $primary;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  h2{
+    background-color: $primary;
+    padding: .3rem 0 .3rem 1.5rem;
+  }
+  .left{
+    border-right: 2px solid $primary;
+    width: 70%;
+    height: 100%;
+  }
+  .right{
+    width: 30%;
+    article{
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .sign{
+        margin-bottom: .4rem;
+      }
+    }
+  }
+  .upperLeft, .bottomLeft{
+    height: 50%;
+    .departures{
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+  .sign{
+    margin-top: .5rem;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    width: 8rem;
+    .topSign{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 3rem;
+      padding: .2rem;
+      background-color: $sl-colour;
+      h4{
+        text-align: center;
+      }
+    }
+    p{
+      text-align: center;
+      padding: .5rem
+    }
+  }
+}
