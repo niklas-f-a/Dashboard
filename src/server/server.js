@@ -3,8 +3,9 @@ const {
   SITE_ID,
   PORT,
   WEATHER_KEY,
-  LONG,
-  LAT } = require('./config')
+  NEWS_API
+} = require('./config')
+const { LONG, LAT } = require('./constants')
 const cors = require('cors')
 const axios = require('axios')
 const express = require('express')
@@ -22,6 +23,11 @@ app.get('/departures', (req, res) => {
 
 app.get('/weather', (req, res) => {
   axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LONG}&units=metric&appid=${WEATHER_KEY}`)
+  .then(response => res.json(response.data))
+})
+
+app.get('/news', (req, res) => {
+  axios.get(`https://newsdata.io/api/1/news?apikey=${NEWS_API}&language=sv`)
   .then(response => res.json(response.data))
 })
 
