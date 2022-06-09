@@ -5,9 +5,11 @@ import Sign from './Sign'
 import { v4 as uuidv4 } from 'uuid'
 
 
+const _1Minute = 60_000
+
 export default function Traffic() {
 
-  const [intervalTime] = useState(60_000)
+  const [intervalTime] = useState(_1Minute)
 
   const { data, loading, error } = useFetchWithInterval('/departures', intervalTime)
 
@@ -19,7 +21,7 @@ export default function Traffic() {
           <h2>Bussar</h2>
           <div className={style.departures}>
             {loading && <p>Loading...</p>}
-            {data?.Buses && !loading && data.Buses.splice(0, 3).map(bus => <Sign vehicle={bus} key={uuidv4()} />)}
+            {data?.Buses && !loading && !loading && data.Buses.splice(0, 3).map(bus => <Sign vehicle={bus} key={uuidv4()} />)}
           </div>
         </article>
         <article className={style.bottomLeft}>
@@ -27,7 +29,7 @@ export default function Traffic() {
           {error && <h1>{error.message}</h1>}
           <div className={style.departures}>
             {loading && <p>Loading...</p>}
-            {data?.Metros && data.Metros.splice(0, 3).map(metro => <Sign vehicle={metro} key={uuidv4()} />)}
+            {data?.Metros && !loading && data.Metros.splice(0, 3).map(metro => <Sign vehicle={metro} key={uuidv4()} />)}
           </div>
         </article>
       </div>
@@ -36,7 +38,7 @@ export default function Traffic() {
         {error && <h1>{error.message}</h1>}
         <article>
           {loading && <p>Loading...</p>}
-          {data?.Trams && data.Trams.splice(0, 2).map(tram => <Sign vehicle={tram} key={uuidv4()} />)}
+          {data?.Trams && !loading && data.Trams.splice(0, 2).map(tram => <Sign vehicle={tram} key={uuidv4()} />)}
         </article>
       </div>
     </section>

@@ -10,14 +10,7 @@ main{
                         "news news news currency currency currency";
   gap: 1rem;
 
-  .weather{
-    background-color: pink;
-    grid-area: weather;
-  }
-  .newsFeed{
-    background-color: beige;
-    grid-area: news;
-  }
+
   .currency{
     background-color: gold;
     grid-area: currency;
