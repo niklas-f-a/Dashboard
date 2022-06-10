@@ -15,6 +15,13 @@ const app = express()
 app.use(cors())
 
 
+app.get('/excuse', (req, res) => {
+  axios.get('https://excuser.herokuapp.com/v1/excuse')
+  .then(response => {
+    console.log(response);
+    res.json(response.data)})
+})
+
 app.get('/departures', (req, res) => {
   axios.get(`https://api.sl.se/api2/realtimedeparturesV4.json?key=${SL_REAL_TIME_API}&siteid=${SITE_ID}&timewindow=15`)
   .then(response => res.json(response.data.ResponseData))

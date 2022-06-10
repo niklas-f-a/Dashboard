@@ -7,12 +7,7 @@ main{
   grid-template-rows: 18rem auto auto;
   grid-template-areas: "traffic traffic traffic traffic traffic clock"
                         "news news news weather weather weather"
-                        "news news news currency currency currency";
-  gap: 1rem;
+                        "news news news excuse excuse excuse";
+  gap: .5rem;
 
-
-  .currency{
-    background-color: gold;
-    grid-area: currency;
-  }
 }

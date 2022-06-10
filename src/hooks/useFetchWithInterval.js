@@ -14,10 +14,13 @@ export function useFetchWithInterval(url, intervalTime){
 
   useEffect(() => {
 
+    const initialFetch = () => {
       axios.get(BASE_URL + url)
       .then(res => setData(res.data))
       .catch(error => setError({message: 'Something went wrong'}))
       .finally(() => setLoading(false))
+
+    }
 
       const genericInterval = () => {
         setLoading(true)
@@ -27,7 +30,7 @@ export function useFetchWithInterval(url, intervalTime){
         .finally(() => setLoading(false))
     }
 
-
+    initialFetch()
     setInterval(genericInterval, intervalTime);
 
     return () => clearInterval(genericInterval)
