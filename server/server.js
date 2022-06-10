@@ -1,9 +1,15 @@
 const {
-  SL_REAL_TIME_API,
-  SITE_ID,
+  SL_REAL_TIME_API_KEY,
+  SL_SITE_ID,
   PORT,
   WEATHER_KEY,
-  NEWS_API
+  NEWS_API,
+  SL_BASE_URL,
+  SL_TIME_WINDOW,
+  WEATHER_BASE_URL,
+  NEWS_API_BASE_URL,
+  NEWS_API_LANG,
+  WEATHER_UNITS
 } = require('./config')
 const { LONG, LAT } = require('./constants')
 const cors = require('cors')
@@ -15,25 +21,26 @@ const app = express()
 app.use(cors())
 
 
+
+app.get('/departures', (req, res) => {
+
+  axios.get(`${SL_BASE_URL}?key=${SL_REAL_TIME_API_KEY}&siteid=${SL_SITE_ID}&timewindow=${SL_TIME_WINDOW}`)
+  .then(response => res.json(response.data.ResponseData))
+})
+//Probably change to something more fun
 app.get('/excuse', (req, res) => {
   axios.get('https://excuser.herokuapp.com/v1/excuse')
   .then(response => {
     res.json(response.data)})
 })
 
-app.get('/departures', (req, res) => {
-  axios.get(`https://api.sl.se/api2/realtimedeparturesV4.json?key=${SL_REAL_TIME_API}&siteid=${SITE_ID}&timewindow=15`)
-  .then(response => res.json(response.data.ResponseData))
-})
-
-
 app.get('/weather', (req, res) => {
-  axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LONG}&units=metric&appid=${WEATHER_KEY}`)
+  axios.get(`${WEATHER_BASE_URL}?lat=${LAT}&lon=${LONG}&units=${WEATHER_UNITS}&appid=${WEATHER_KEY}`)
   .then(response => res.json(response.data))
 })
 
 app.get('/news', (req, res) => {
-  axios.get(`https://newsdata.io/api/1/news?apikey=${NEWS_API}&language=sv`)
+  axios.get(`${NEWS_API_BASE_URL}?apikey=${NEWS_API}&language=${NEWS_API_LANG}`)
   .then(response => res.json(response.data))
 })
 
