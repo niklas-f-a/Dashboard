@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import NewsArticle from './NewsArticle'
 
 
-const _1Hour = 3600000
+const _1Hour = 3_600_000
 const _1Minute = 60_000
 
 export default function NewsFeed() {

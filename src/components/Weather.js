@@ -2,7 +2,7 @@ import { useFetchWithInterval } from "../hooks/useFetchWithInterval"
 import { useState } from 'react'
 import style from '../styles/weather.module.scss'
 
-const _3Hours = 108_000_00
+const _3Hours = 10_800_000
 
 export default function Weather() {
 
@@ -12,7 +12,7 @@ export default function Weather() {
 
   const formatDate = date => new Date(date * 1000).toLocaleString("sv-SV").split(" ")[1]
 
-
+//https ? image hide URL?
   return (
     <section className={style.weather}>
       <h2>Väder för {data?.name}</h2>
@@ -20,17 +20,17 @@ export default function Weather() {
       {loading && <p>Loading...</p>}
       {data && <article>
         <figure>
-          <img src={`http://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`} alt="" />
+          <img src={`http://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`} alt={data?.weather[0].description} />
         </figure>
         <div className={style.weatherInfo}>
           <p>{data?.weather[0].description}</p>
           <span>
             <p>Temp: {Math.round(data?.main.temp)}&#186;C</p>
-            <p>Känns som: {Math.round(data?.main.feels_like)}&#186;C</p>
+            <p>Känns som: {Math.round(data?.main.feels_like)}&deg;C</p>
           </span>
           <span>
-            <p>Lägsta temp: {Math.round(data?.main.temp_min)}&#186;C</p>
-            <p>Högsta temp: {Math.round(data?.main.temp_max)}&#186;C</p>
+            <p>Lägsta temp: {Math.round(data?.main.temp_min)}&deg;C</p>
+            <p>Högsta temp: {Math.round(data?.main.temp_max)}&deg;C</p>
           </span>
           <span>
             <p>Soluppgång: {formatDate(data?.sys.sunrise)}</p>

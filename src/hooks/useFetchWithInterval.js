@@ -16,8 +16,15 @@ export function useFetchWithInterval(url, intervalTime){
 
     const initialFetch = () => {
       axios.get(BASE_URL + url)
-      .then(res => setData(res.data))
-      .catch(error => setError({message: 'Something went wrong'}))
+      .then(res => {
+        console.log(res);
+        setData(res.data)
+
+      })
+      .catch(error => {
+        setError({message: 'Something went wrong'})
+        console.log(error);
+      })
       .finally(() => setLoading(false))
 
     }
