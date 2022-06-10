@@ -11,11 +11,11 @@ export default function Traffic() {
 
   const [intervalTime] = useState(_1Minute)
 
-  // const { data, loading, error } = useFetchWithInterval('/departures', intervalTime)
+  const { data, loading, error } = useFetchWithInterval('/departures', intervalTime)
 
   return (
     <section className={style.traffic}>
-      {/* <div className={style.left}>
+      <div className={style.left}>
         <article className={style.upperLeft}>
         {error && <h1>{error.message}</h1>}
           <h2>Bussar</h2>
@@ -40,7 +40,7 @@ export default function Traffic() {
           {loading && <p>Loading...</p>}
           {data?.Trams && !loading && data.Trams.splice(0, 2).map(tram => <Sign vehicle={tram} key={uuidv4()} />)}
         </article>
-      </div> */}
+      </div>
     </section>
   )
 }

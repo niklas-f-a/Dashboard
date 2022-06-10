@@ -10,33 +10,33 @@ const _1Minute = 60_000
 
 export default function NewsFeed() {
 
-  // const { loading, error, data } = useFetchWithInterval('/news', _1Hour)
-  // const [shuffledArticles, setShuffledArticles] = useState([])
+  const { loading, error, data } = useFetchWithInterval('/news', _1Hour)
+  const [shuffledArticles, setShuffledArticles] = useState([])
 
-  // useEffect(() => {
-  //   if(!data?.results) return
+  useEffect(() => {
+    if(!data?.results) return
 
-  //   setShuffledArticles(data.results.sort(() => Math.random() - 0.5).slice(0, 2))
 
-  //   const shuffleNews = () => {
-  //     setShuffledArticles(data.results.sort(() => Math.random() - 0.5).slice(0, 2))
+    const shuffleNews = () => {
+      setShuffledArticles(data.results.sort(() => Math.random() - 0.5).slice(0, 2))
+    }
 
-  //   }
-  //   setInterval(shuffleNews, _1Minute)
+    shuffleNews()
+    setInterval(shuffleNews, _1Minute)
 
-  //   return () => clearInterval(shuffleNews)
+    return () => clearInterval(shuffleNews)
 
-  // }, [data])
+  }, [data])
 
 
   return (
     <section className={style.newsFeed}>
-      {/* <h2>Nyheter</h2>
+      <h2>Nyheter</h2>
       {error && <p>{error.message}</p>}
       <div>
         {loading && <p>Loading...</p>}
         {shuffledArticles && shuffledArticles.map(news => <NewsArticle news={news} key={uuidv4()} />)}
-      </div> */}
+      </div>
     </section>
   )
 }

@@ -18,7 +18,6 @@ app.use(cors())
 app.get('/excuse', (req, res) => {
   axios.get('https://excuser.herokuapp.com/v1/excuse')
   .then(response => {
-    console.log(response);
     res.json(response.data)})
 })
 
