@@ -40,7 +40,7 @@ router.get('/news', (req, res) => {
   .then(response => res.json(response.data))
 })
 
-router.get('*', (req, res) => {
+router.get('/', (req, res) => {
   res.sendFile('./index.html', {root: path.join(__dirname, '..', '..', '/build')})
 })
 
