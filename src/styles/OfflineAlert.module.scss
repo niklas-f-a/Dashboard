@@ -1,0 +1,9 @@
+@import './App.scss';
+
+.offlineAlert{
+  grid-area: traffic;
+  border: 1px solid $primary;
+  border-radius: 8px;
+  background-color: $secondary;
+  padding: 1rem;
+}

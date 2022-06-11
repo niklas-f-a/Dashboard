@@ -14,9 +14,10 @@ export function useFetchWithInterval(url, intervalTime){
 
   useEffect(() => {
 
+    const controller = new AbortController()
     const fetchData = () => {
       setLoading(true)
-      axios.get(BASE_URL + url)
+      axios.get(BASE_URL + url, { signal: controller.signal })
         .then(res => setData(res.data))
         .catch(error => setError({message: 'Something went wrong'}))
         .finally(() => setLoading(false))
@@ -25,8 +26,10 @@ export function useFetchWithInterval(url, intervalTime){
     fetchData()
     setInterval(fetchData, intervalTime);
 
-    return () => clearInterval(fetchData)
-
+    return () => {
+      controller.abort()
+      clearInterval(fetchData)
+    }
   }, [])
 
 

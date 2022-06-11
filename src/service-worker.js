@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 
-const DASHBOARD_CACHE = 'dashBoardCache-v4'
+const DASHBOARD_CACHE = 'dashBoardCache-v1'
 
 const statics = self.__WB_MANIFEST.map(file => file.url)
 

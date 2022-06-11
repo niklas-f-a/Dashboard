@@ -5,7 +5,7 @@ const _30s = 30_000
 
 export default function RandomExcuse() {
 
-  const { loading, error, data } = useFetchWithInterval('/excuse', _30s)
+  const { loading, error, data: excuse } = useFetchWithInterval('/excuse', _30s)
 
 
   return (
@@ -13,8 +13,8 @@ export default function RandomExcuse() {
       <h2>En ursäkt</h2>
       <article>
         {error && error.message}
-        {loading && !data && <p>Loading...</p>}
-        {data && <p>{data[0].excuse}</p>}
+        {loading && !excuse && <p>Loading...</p>}
+        {excuse && <p>{excuse[0].excuse}</p>}
       </article>
     </div>
   )

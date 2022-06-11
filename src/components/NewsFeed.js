@@ -10,15 +10,14 @@ const _1Minute = 60_000
 
 export default function NewsFeed() {
 
-  const { loading, error, data } = useFetchWithInterval('/news', _1Hour)
+  const { loading, error, data: news } = useFetchWithInterval('/news', _1Hour)
   const [shuffledArticles, setShuffledArticles] = useState([])
 
   useEffect(() => {
-    if(!data?.results) return
-
+    if(!news?.results) return
 
     const shuffleNews = () => {
-      setShuffledArticles(data.results.sort(() => Math.random() - 0.5).slice(0, 2))
+      setShuffledArticles(news.results.sort(() => Math.random() - 0.5).slice(0, 2))
     }
 
     shuffleNews()
@@ -26,7 +25,7 @@ export default function NewsFeed() {
 
     return () => clearInterval(shuffleNews)
 
-  }, [data])
+  }, [news])
 
 
   return (

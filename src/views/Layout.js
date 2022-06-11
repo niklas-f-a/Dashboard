@@ -15,7 +15,7 @@ export default function Layout(){
       <Traffic />
       <Clock />
       <Weather />
-      <NewsFeed />
+      {/* <NewsFeed /> */}
       <RandomExcuse />
     </main>
   )
