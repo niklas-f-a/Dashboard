@@ -17,8 +17,8 @@ export default function Traffic() {
     <section className={style.traffic}>
       <div className={style.left}>
         <article className={style.upperLeft}>
-        {error && <h1>{error.message}</h1>}
           <h2>Bussar</h2>
+          {error && <p>{error.message}</p>}
           <div className={style.departures}>
             {loading && <p>Loading...</p>}
             {data?.Buses && !loading && !loading && data.Buses.splice(0, 3).map(bus => <Sign vehicle={bus} key={uuidv4()} />)}

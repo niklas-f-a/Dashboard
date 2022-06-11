@@ -1,20 +1,12 @@
 /* eslint-disable no-restricted-globals */
 
-const DASHBOARD_CACHE = 'dashBoardCache-v1'
+const DASHBOARD_CACHE = 'dashBoardCache-v4'
 
-const statics = [
-  '/',
-  'manifest.json',
-  'logo192.png',
-  'logo512.png',
-  ...self.__WB_MANIFEST.map(file => file.url)
-]
+const statics = self.__WB_MANIFEST.map(file => file.url)
 
 
 const cacheResources = files => {
-  console.log(statics);
-  caches.open(DASHBOARD_CACHE)
-  .then(cache => cache.addAll(files))
+  caches.open(DASHBOARD_CACHE).then(cache => cache.addAll(files))
 }
 
 const clearOldCache = () => {
@@ -25,6 +17,26 @@ const clearOldCache = () => {
   })
 }
 
+const offlineResponse = request => {
+  caches.match(request).then(res => {
+    if(res) return res
+    else return new Response(
+      '<h1>Offline. You need to Online to update info</h1>',
+      {header: { 'Content-Type': 'text/html' }}
+    )
+  })
+}
+
+const fetchAndCache = request => {
+  fetch(request).then(response => {
+    const resClone = response.clone()
+    caches.open(DASHBOARD_CACHE).then(cache => {
+      cache.put(request, resClone)
+    })
+    return response
+  }).catch(err => console.log(err))
+}
+
 
 self.addEventListener('install', e => {
   console.log('installing')
@@ -33,26 +45,8 @@ self.addEventListener('install', e => {
 })
 
 self.addEventListener('fetch', e => {
-  if(!navigator.onLine){
-    console.log(e.request);
-    e.respondWith( caches.match(e.request).then(res => {
-      if(res) return res
-      else return new Response(
-        '<h1>Offline</h1>',
-        {header: { 'Content-Type': 'text/html' }}
-      )
-    }) )
-  }else{
-    fetch(e.request).then(response => {
-      console.log(response);
-      const resClone = response.clone()
-      caches.open(DASHBOARD_CACHE).then(cache => {
-        console.log('caching');
-        cache.put(e.request, resClone)
-      })
-      return response
-    }).catch(err => console.log(err))
-  }
+  if(!navigator.onLine) e.respondWith( offlineResponse(e.request) )
+  else fetchAndCache(e.request)
 })
 
 self.addEventListener('activate', e => {

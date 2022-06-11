@@ -20,7 +20,7 @@ export default function Weather() {
       {loading && <p>Loading...</p>}
       {data && <article>
         <figure>
-          {/* <img src={`http://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`} alt={data?.weather[0].description} /> */}
+          <img src={`https://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`} alt={data?.weather[0].description} />
         </figure>
         <div className={style.weatherInfo}>
           {/* <p>{data?.weather[0].description}</p> */}
