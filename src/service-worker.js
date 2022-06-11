@@ -2,10 +2,17 @@
 
 const DASHBOARD_CACHE = 'dashBoardCache-v1'
 
-const statics = self.__WB_MANIFEST.map(file => file.url)
+const statics = [
+  '/',
+  'manifest.json',
+  'logo192.png',
+  'logo512.png',
+  ...self.__WB_MANIFEST.map(file => file.url)
+]
 
 
 const cacheResources = files => {
+  console.log(statics);
   caches.open(DASHBOARD_CACHE)
   .then(cache => cache.addAll(files))
 }
@@ -18,12 +25,6 @@ const clearOldCache = () => {
   })
 }
 
-// const offLineResponse = () => {
-//   const markup = '<h1>Du är för tillfället offline. Ingen ny information hämtas för tillfället<h1>'
-//   const headers = {'Content-type': 'text/html'}
-//   return new Response(markup, {headers})
-// }
-
 
 self.addEventListener('install', e => {
   console.log('installing')
@@ -32,15 +33,18 @@ self.addEventListener('install', e => {
 })
 
 self.addEventListener('fetch', e => {
-  // if(!navigator.onLine){
-  //   console.log('offline');
-  //   e.respondWith( caches.match(e.request).then(response => {
-  //     return response
-  //   }))
-  // }
-  // else {
-  //   fetch(e.request)
-  // }
+  if(!navigator.onLine){
+    console.log(e.request);
+    e.respondWith( caches.match(e.request).then(res => {
+      if(res) return res
+      else return new Response(
+        '<h1>Offline</h1>',
+        {header: { 'Content-Type': 'text/html' }}
+      )
+    }) )
+  }else{
+    e.respondWith( fetch(e.request) )
+  }
 })
 
 self.addEventListener('activate', e => {

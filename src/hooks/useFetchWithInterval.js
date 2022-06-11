@@ -10,41 +10,37 @@ export function useFetchWithInterval(url, intervalTime){
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [online, setOnline] = useState(true)
 
 
   useEffect(() => {
+    if(!online) return
 
-    const initialFetch = () => {
-      axios.get(BASE_URL + url)
-      .then(res => {
-        console.log(res);
-        setData(res.data)
-
-      })
-      .catch(error => {
-        setError({message: 'Something went wrong'})
-        console.log(error);
-      })
-      .finally(() => setLoading(false))
-
+    const setOfflineFlag = () => {
+      setOnline(false)
+      clearInterval(fetchData)
     }
+    window.addEventListener('offline', setOfflineFlag)
 
-      const genericInterval = () => {
-        setLoading(true)
-        axios.get(BASE_URL + url)
+    const fetchData = () => {
+      setLoading(true)
+      axios.get(BASE_URL + url)
         .then(res => setData(res.data))
         .catch(error => setError({message: 'Something went wrong'}))
         .finally(() => setLoading(false))
     }
 
-    initialFetch()
-    setInterval(genericInterval, intervalTime);
+    fetchData()
+    setInterval(fetchData, intervalTime);
 
-    return () => clearInterval(genericInterval)
+    return () => {
+      clearInterval(fetchData)
+      window.removeEventListener('offline', setOfflineFlag)
+    }
 
-  }, [])
+  }, [online])
 
 
-  return { data, loading, error }
+  return { data, loading, error, online }
 
 }
