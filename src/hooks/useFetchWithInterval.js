@@ -10,17 +10,9 @@ export function useFetchWithInterval(url, intervalTime){
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  const [online, setOnline] = useState(true)
 
 
   useEffect(() => {
-    if(!online) return
-
-    const setOfflineFlag = () => {
-      setOnline(false)
-      clearInterval(fetchData)
-    }
-    window.addEventListener('offline', setOfflineFlag)
 
     const fetchData = () => {
       setLoading(true)
@@ -33,14 +25,11 @@ export function useFetchWithInterval(url, intervalTime){
     fetchData()
     setInterval(fetchData, intervalTime);
 
-    return () => {
-      clearInterval(fetchData)
-      window.removeEventListener('offline', setOfflineFlag)
-    }
+    return () => clearInterval(fetchData)
 
-  }, [online])
+  }, [])
 
 
-  return { data, loading, error, online }
+  return { data, loading, error }
 
 }

@@ -43,7 +43,15 @@ self.addEventListener('fetch', e => {
       )
     }) )
   }else{
-    e.respondWith( fetch(e.request) )
+    fetch(e.request).then(response => {
+      console.log(response);
+      const resClone = response.clone()
+      caches.open(DASHBOARD_CACHE).then(cache => {
+        console.log('caching');
+        cache.put(e.request, resClone)
+      })
+      return response
+    }).catch(err => console.log(err))
   }
 })
 

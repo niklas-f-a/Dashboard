@@ -14,7 +14,7 @@ export default function RandomExcuse() {
       <article>
         {error && error.message}
         {loading && !data && <p>Loading...</p>}
-        {/* {data && <p>{data[0].excuse}</p>} */}
+        {data && <p>{data[0].excuse}</p>}
       </article>
     </div>
   )

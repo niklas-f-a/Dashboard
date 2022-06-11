@@ -7,7 +7,7 @@ const _3Hours = 10_800_000
 export default function Weather() {
 
   const [intervalTime] = useState(_3Hours)
-  const { online, error, loading, data } = useFetchWithInterval('/weather', intervalTime)
+  const { error, loading, data } = useFetchWithInterval('/weather', intervalTime)
 
 
   const formatDate = date => new Date(date * 1000).toLocaleString("sv-SV").split(" ")[1]
@@ -22,7 +22,7 @@ export default function Weather() {
         <figure>
           {/* <img src={`http://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`} alt={data?.weather[0].description} /> */}
         </figure>
-        {online && <div className={style.weatherInfo}>
+        <div className={style.weatherInfo}>
           {/* <p>{data?.weather[0].description}</p> */}
           <span>
             <p>Temp: {Math.round(data?.main?.temp)}&#186;C</p>
@@ -36,7 +36,7 @@ export default function Weather() {
             <p>Soluppgång: {formatDate(data?.sys?.sunrise)}</p>
             <p>Solnedgång: {formatDate(data?.sys?.sunset)}</p>
           </span>
-        </div>}
+        </div>
       </article>}
     </section>
   )
