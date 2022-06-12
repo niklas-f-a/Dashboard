@@ -18,6 +18,7 @@ export default function Traffic() {
   const { online } = useContext(OnlineContext)
   const { data: traffic, loading, error } = useFetchWithInterval(departuresUrl, intervalTime)
 
+
   return (
     <>
       {!online
@@ -29,7 +30,7 @@ export default function Traffic() {
             {error && <p>{error.message}</p>}
             <div className={style.departures}>
               {loading && <p>Loading...</p>}
-              {traffic?.Buses && !loading && !loading && traffic.Buses.splice(0, 3).map(bus => <Sign vehicle={bus} key={uuidv4()} />)}
+              {traffic?.ResponseData?.Buses && !loading && !loading && traffic.ResponseData.Buses.splice(0, 3).map(bus => <Sign vehicle={bus} key={uuidv4()} />)}
             </div>
           </article>
           <article className={style.bottomLeft}>
@@ -37,7 +38,7 @@ export default function Traffic() {
             {error && <h1>{error.message}</h1>}
             <div className={style.departures}>
               {loading && <p>Loading...</p>}
-              {traffic?.Metros && !loading && traffic.Metros.splice(0, 3).map(metro => <Sign vehicle={metro} key={uuidv4()} />)}
+              {traffic?.ResponseData?.Metros && !loading && traffic?.ResponseData?.Metros.splice(0, 3).map(metro => <Sign vehicle={metro} key={uuidv4()} />)}
             </div>
           </article>
         </div>
@@ -46,7 +47,7 @@ export default function Traffic() {
           {error && <h1>{error.message}</h1>}
           <article>
             {loading && <p>Loading...</p>}
-            {traffic?.Trams && !loading && traffic.Trams.splice(0, 2).map(tram => <Sign vehicle={tram} key={uuidv4()} />)}
+            {traffic?.ResponseData?.Trams && !loading && traffic?.ResponseData?.Trams.splice(0, 2).map(tram => <Sign vehicle={tram} key={uuidv4()} />)}
           </article>
         </div>
       </section>

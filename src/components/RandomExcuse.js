@@ -1,6 +1,7 @@
 import style from '../styles/RandomExcuse.module.scss'
 import { useFetchWithInterval } from '../hooks/useFetchWithInterval'
 
+
 const _30s = 30_000
 
 const excuseURL = process.env.REACT_APP_EXCUSE_URL
