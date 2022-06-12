@@ -11,3 +11,13 @@ main{
   gap: .5rem;
 
 }
+
+
+@media(max-width: 650px){
+  main{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100vw;
+  }
+}
