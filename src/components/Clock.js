@@ -29,7 +29,7 @@ export default function Clock() {
 
   const hourDegree = () => ((today.getHours() / 12) * 360)
 
-  const padDate = date => String(date).padStart(0, '2')
+  const padDate = date => String(date).padStart(2, '0')
 
 
   return (

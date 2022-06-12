@@ -12,7 +12,7 @@ export default function Weather() {
 
   const formatDate = date => new Date(date * 1000).toLocaleString("sv-SV").split(" ")[1]
 
-//https ? image hide URL?
+
   return (
     <section className={style.weather}>
       <h2>Väder för {weather?.name}</h2>
