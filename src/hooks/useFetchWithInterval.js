@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const BASE_URL = process.env.REACT_APP_BASE_URL
+const BASE_URL = process.env.REACT_APP_BASE_URL_API
 
 
 
@@ -14,10 +14,9 @@ export function useFetchWithInterval(url, intervalTime){
 
   useEffect(() => {
 
-    const controller = new AbortController()
     const fetchData = () => {
       setLoading(true)
-      axios.get(BASE_URL + url, { signal: controller.signal })
+      axios.get(BASE_URL + url)
         .then(res => setData(res.data))
         .catch(error => setError({message: 'Something went wrong'}))
         .finally(() => setLoading(false))
@@ -26,10 +25,8 @@ export function useFetchWithInterval(url, intervalTime){
     fetchData()
     setInterval(fetchData, intervalTime);
 
-    return () => {
-      controller.abort()
-      clearInterval(fetchData)
-    }
+    return () => clearInterval(fetchData)
+
   }, [])
 
 

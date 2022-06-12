@@ -16,7 +16,6 @@ export default function Traffic() {
   const { online } = useContext(OnlineContext)
   const { data: traffic, loading, error } = useFetchWithInterval('/departures', intervalTime)
 
-
   return (
     <>
       {!online

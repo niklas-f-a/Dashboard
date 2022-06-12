@@ -29,6 +29,7 @@ export default function Clock() {
 
   const hourDegree = () => ((today.getHours() / 12) * 360)
 
+  const padDate = date => String(date).padStart(0, '2')
 
 
   return (
@@ -40,8 +41,8 @@ export default function Clock() {
         <div style={{transform: `rotate(${secondDegree()}deg)`}} className={styles.second}></div>
         <div className={styles.digital}>
           <span>
-            <strong>{today.getHours()}:{today.getMinutes()}</strong>
-            <small> {today.getSeconds()}</small>
+            <strong>{padDate(today.getHours())}:{padDate(today.getMinutes())}</strong>
+            <small> {padDate(today.getSeconds())}</small>
           </span>
         </div>
         <ul>
