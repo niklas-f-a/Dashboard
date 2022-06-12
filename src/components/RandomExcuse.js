@@ -3,9 +3,11 @@ import { useFetchWithInterval } from '../hooks/useFetchWithInterval'
 
 const _30s = 30_000
 
+const excuseURL = process.env.REACT_APP_EXCUSE_URL
+
 export default function RandomExcuse() {
 
-  const { loading, error, data: excuse } = useFetchWithInterval('/excuse', _30s)
+  const { loading, error, data: excuse } = useFetchWithInterval(excuseURL, _30s)
 
 
   return (

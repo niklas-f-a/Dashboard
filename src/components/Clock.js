@@ -9,12 +9,11 @@ export default function Clock() {
 
   const [today, setToday] = useState(new Date())
 
+  const tick = () => {
+    setToday(new Date())
+  }
 
   useEffect(() => {
-
-    const tick = () => {
-      setToday(new Date())
-    }
 
     setInterval(tick, 1000)
 

@@ -4,10 +4,12 @@ import style from '../styles/weather.module.scss'
 
 const _3Hours = 10_800_000
 
+const weatherUrl = process.env.REACT_APP_WEATHER_URL
+
 export default function Weather() {
 
   const [intervalTime] = useState(_3Hours)
-  const { error, loading, data: weather } = useFetchWithInterval('/weather', intervalTime)
+  const { error, loading, data: weather } = useFetchWithInterval(weatherUrl, intervalTime)
 
 
   const formatDate = date => new Date(date * 1000).toLocaleString("sv-SV").split(" ")[1]

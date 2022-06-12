@@ -9,12 +9,14 @@ import OfflineAlert from './OfflineAlert'
 
 const _1Minute = 60_000
 
+const departuresUrl = process.env.REACT_APP_DEPARTURES_URL
+
 export default function Traffic() {
 
   const [intervalTime] = useState(_1Minute)
 
   const { online } = useContext(OnlineContext)
-  const { data: traffic, loading, error } = useFetchWithInterval('/departures', intervalTime)
+  const { data: traffic, loading, error } = useFetchWithInterval(departuresUrl, intervalTime)
 
   return (
     <>

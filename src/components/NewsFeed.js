@@ -8,9 +8,11 @@ import NewsArticle from './NewsArticle'
 const _1Hour = 3_600_000
 const _1Minute = 60_000
 
+const newsUrl = process.env.REACT_APP_NEWS_URL
+
 export default function NewsFeed() {
 
-  const { loading, error, data: news } = useFetchWithInterval('/news', _1Hour)
+  const { loading, error, data: news } = useFetchWithInterval(newsUrl, _1Hour)
   const [shuffledArticles, setShuffledArticles] = useState([])
 
   useEffect(() => {
