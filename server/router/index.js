@@ -26,8 +26,7 @@ router.get('/departures', (req, res) => {
 //Probably change to something more fun
 router.get('/excuse', (req, res) => {
   axios.get('https://excuser.herokuapp.com/v1/excuse')
-  .then(response => {
-    res.json(response.data)})
+  .then(response => res.json(response.data))
 })
 
 router.get('/weather', (req, res) => {
