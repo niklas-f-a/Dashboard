@@ -11,23 +11,22 @@ export function useFetchWithInterval(url, intervalTime){
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
+  const fetchData = () => {
+    setLoading(true)
+    axios.get(url)
+      .then(res => setData(res.data))
+      .catch(error => setError({message: 'Something went wrong'}))
+      .finally(() => setLoading(false))
+  }
 
   useEffect(() => {
-
-    const fetchData = () => {
-      setLoading(true)
-      axios.get(url)
-        .then(res => setData(res.data))
-        .catch(error => setError({message: 'Something went wrong'}))
-        .finally(() => setLoading(false))
-    }
 
     fetchData()
     setInterval(fetchData, intervalTime);
 
     return () => clearInterval(fetchData)
 
-  }, [])
+  }, [url])
 
 
   return { data, loading, error }
