@@ -1,7 +1,8 @@
 const axios = require('axios')
 
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
-const handler = async (event) => {
+const handler = async (event, context) => {
+  console.log(event, context);
   try{
     const excuseUrl = process.env.EXCUSE_API_URL
     const response = await axios.get(excuseUrl)

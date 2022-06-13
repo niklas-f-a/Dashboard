@@ -49,7 +49,7 @@ self.addEventListener('fetch', e => {
   if(!navigator.onLine) {
     e.respondWith( offlineResponse(e.request) )
   }else{
-   fetchAndCache(e.request)
+    fetchAndCache(e.request)
   }
 })
 
