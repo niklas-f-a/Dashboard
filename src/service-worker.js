@@ -17,7 +17,7 @@ const clearOldCache = () => {
   })
 }
 
-const offlineResponse = request => {
+const cachedAssets = request => {
   return caches.match(request).then(res => {
     if(res) return res
     else return new Response(
@@ -47,7 +47,7 @@ self.addEventListener('install', e => {
 
 self.addEventListener('fetch', e => {
   if(!navigator.onLine) {
-    e.respondWith( offlineResponse(e.request) )
+    e.respondWith( cachedAssets(e.request) )
   }else{
     fetchAndCache(e.request)
   }
